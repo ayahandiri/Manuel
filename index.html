@@ -530,10 +530,89 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .categories-grid { grid-template-columns: 1fr 1fr; }
-      .password-box { padding: 1.5rem; }
-    }
+
+  nav {
+    padding: 0 1rem;
+    height: auto;
+    min-height: 64px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.6rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+
+  .nav-logo {
+    font-size: 1.4rem;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.7rem;
+    flex: 1;
+    text-align: center;
+  }
+
+  .hero {
+    padding: 3rem 1rem 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .page-header,
+  .gazzetta-section,
+  .produits-container,
+  .tutoriel-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .carte-header {
+    padding: 1rem;
+  }
+
+  .carte-header h2 {
+    font-size: 1rem;
+  }
+
+  .carte-header p {
+    font-size: 0.75rem;
+  }
+
+  .carte-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  .direct-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+  footer {
+    font-size: 0.7rem;
+    padding: 1rem;
+  }
+}
   </style>
 </head>
 <body class="locked">
