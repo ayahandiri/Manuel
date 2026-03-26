@@ -20,12 +20,16 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       background: var(--cream);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
     body.locked {
@@ -134,14 +138,19 @@
     nav {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
       background: var(--dark);
       border-bottom: 2px solid var(--gold);
+      padding: 0.9rem 1.5rem;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
-      min-height: 64px;
+      gap: 1rem;
     }
 
     .nav-logo {
@@ -150,9 +159,7 @@
       color: var(--gold);
       letter-spacing: 0.05em;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
+      white-space: nowrap;
     }
 
     .nav-links {
@@ -162,24 +169,24 @@
       flex-wrap: wrap;
     }
 
-    .nav-links a {
+    .nav-links button {
+      border: none;
+      background: transparent;
       color: #ccc;
-      text-decoration: none;
+      font-family: inherit;
       font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 0.55rem 0.9rem;
+      padding: 0.6rem 0.9rem;
       border-radius: 4px;
       transition: color 0.2s, background 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      cursor: pointer;
       min-height: 44px;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
+    .nav-links button:hover,
+    .nav-links button.active {
       color: var(--gold);
       background: rgba(200,160,74,0.1);
     }
@@ -225,6 +232,7 @@
       margin: 0 auto 2rem;
     }
 
+    /* ── DIVIDER ── */
     .divider {
       display: flex;
       align-items: center;
@@ -332,6 +340,7 @@
       cursor: pointer;
       transition: background 0.2s;
       user-select: none;
+      gap: 1rem;
     }
 
     .carte-header:hover { background: rgba(200,160,74,0.04); }
@@ -340,6 +349,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      min-width: 0;
     }
 
     .carte-icon {
@@ -350,6 +360,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
+      flex-shrink: 0;
     }
 
     .icon-hiver { background: rgba(139,26,26,0.1); }
@@ -362,6 +373,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
       color: var(--dark);
+      margin-bottom: 0.1rem;
     }
 
     .carte-header p {
@@ -374,6 +386,7 @@
       color: var(--gold);
       font-size: 1.2rem;
       transition: transform 0.3s;
+      flex-shrink: 0;
     }
 
     .carte-block.open .carte-chevron { transform: rotate(180deg); }
@@ -400,7 +413,7 @@
       font-weight: 500;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      cursor: pointer;
+      cursor: default;
       border: 1px solid transparent;
       transition: all 0.2s;
     }
@@ -443,6 +456,8 @@
       font-size: 0.85rem;
       font-weight: 500;
       transition: all 0.2s;
+      min-width: 0;
+      word-break: break-word;
     }
 
     .cat-link:hover {
@@ -452,7 +467,7 @@
       transform: translateX(3px);
     }
 
-    .cat-link span { font-size: 1rem; }
+    .cat-link span { font-size: 1rem; flex-shrink: 0; }
 
     .direct-link {
       display: inline-flex;
@@ -503,11 +518,7 @@
       line-height: 1.7;
     }
 
-    .tuto-block ul {
-      padding-left: 1.2rem;
-      margin-top: 0.5rem;
-    }
-
+    .tuto-block ul { padding-left: 1.2rem; margin-top: 0.5rem; }
     .tuto-block li { margin-bottom: 0.3rem; }
 
     .legend {
@@ -529,6 +540,7 @@
       width: 14px;
       height: 14px;
       border-radius: 3px;
+      flex-shrink: 0;
     }
 
     /* ── PAGE HEADER ── */
@@ -563,463 +575,484 @@
 
     footer span { color: var(--gold); }
 
-    /* ── MOBILE ── */
-  @media (max-width: 768px) {
-  nav {
-    padding: 0.8rem 1rem;
-    min-height: auto;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    gap: 0.8rem;
-  }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-  .nav-logo {
-    font-size: 1.35rem;
-    text-align: center;
-    justify-content: center;
-    width: 100%;
-  }
+      .nav-logo {
+        text-align: center;
+      }
 
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-  }
+      .nav-links {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
 
-  .nav-links li {
-    width: 100%;
-  }
+      .nav-links li,
+      .nav-links button {
+        width: 100%;
+      }
+    }
 
-  .nav-links a {
-    width: 100%;
-    font-size: 0.8rem;
-    padding: 0.8rem 1rem;
-    text-align: center;
-    min-height: 44px;
-  }
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.8rem 1rem;
+      }
 
-  .hero {
-    padding: 3rem 1rem 2rem;
-  }
+      .nav-links {
+        grid-template-columns: 1fr;
+      }
 
-  .hero h1 {
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
+      .nav-links button {
+        font-size: 0.8rem;
+        padding: 0.85rem 1rem;
+      }
 
-  .hero p {
-    font-size: 0.95rem;
-  }
+      .hero {
+        padding: 3rem 1rem 2rem;
+      }
 
-  .page-header,
-  .gazzetta-section,
-  .produits-container,
-  .tutoriel-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+      .hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
 
-  .divider {
-    padding: 0 1rem;
-  }
+      .hero p {
+        font-size: 0.95rem;
+      }
 
-  .news-grid,
-  .categories-grid {
-    grid-template-columns: 1fr;
-  }
+      .page-header,
+      .gazzetta-section,
+      .produits-container,
+      .tutoriel-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
 
-  .carte-header {
-    padding: 1rem;
-  }
+      .divider {
+        padding: 0 1rem;
+      }
 
-  .carte-body {
-    padding: 0 1rem 1rem;
-  }
+      .news-grid,
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
 
-  .carte-header h2 {
-    font-size: 1rem;
-  }
+      .carte-header {
+        padding: 1rem;
+      }
 
-  .carte-header p {
-    font-size: 0.75rem;
-  }
+      .carte-body {
+        padding: 0 1rem 1rem;
+      }
 
-  .carte-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 1rem;
-  }
+      .carte-header h2 {
+        font-size: 1rem;
+      }
 
-  .direct-link {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
+      .carte-header p {
+        font-size: 0.75rem;
+      }
 
-  .password-box {
-    padding: 1.5rem;
-  }
-}
+      .carte-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+      }
 
-/* ── TRÈS PETITS ÉCRANS ── */
-  @media (max-width: 480px) {
-  .nav-logo {
-    font-size: 1.2rem;
-  }
+      .direct-link {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
 
-  .nav-links a {
-    font-size: 0.75rem;
-    padding: 0.75rem 0.8rem;
-  }
+      .password-box {
+        padding: 1.5rem;
+      }
 
-  .hero {
-    padding: 2.5rem 1rem 1.8rem;
-  }
+      .legend {
+        flex-direction: column;
+      }
+    }
 
-  .page-header h1 {
-    font-size: 1.6rem;
-  }
+    @media (max-width: 480px) {
+      .nav-logo {
+        font-size: 1.2rem;
+      }
 
-  .section-title {
-    font-size: 1.15rem;
-  }
+      .nav-links button {
+        font-size: 0.75rem;
+        padding: 0.8rem;
+      }
 
-  .tuto-block,
-  .news-card {
-    padding: 1rem;
-  }
+      .page-header h1 {
+        font-size: 1.6rem;
+      }
 
-  footer {
-    font-size: 0.72rem;
-    padding: 1rem;
-  }
-}
+      .section-title {
+        font-size: 1.15rem;
+      }
+
+      .tuto-block,
+      .news-card {
+        padding: 1rem;
+      }
+
+      footer {
+        font-size: 0.72rem;
+        padding: 1rem;
+      }
+    }
   </style>
 </head>
 <body class="locked">
 
-<div class="password-overlay" id="passwordOverlay">
-  <div class="password-box">
-    <h1>Accès protégé</h1>
-    <p>Veuillez entrer le mot de passe pour accéder à l’espace produits R7.</p>
-    <input
-      type="password"
-      id="passwordInput"
-      placeholder="Mot de passe"
-      autocomplete="off"
-      onkeydown="if(event.key === 'Enter') checkPassword()"
-    />
-    <button onclick="checkPassword()">Entrer</button>
-    <div class="password-error" id="passwordError"></div>
-  </div>
-</div>
-
-<nav>
-  <a class="nav-logo" href="#" onclick="return showPage('accueil')">Il Ristorante <span style="color:#666;font-size:1rem">R7</span></a>
-  <ul class="nav-links">
-    <li><a href="#" onclick="return showPage('accueil')" id="nav-accueil" class="active">Accueil</a></li>
-    <li><a href="#" onclick="return showPage('tutoriel')" id="nav-tutoriel">Tutoriel</a></li>
-    <li><a href="#" onclick="return showPage('produits')" id="nav-produits">Produits</a></li>
-  </ul>
-</nav>
-
-<div class="page active" id="page-accueil">
-  <div class="hero">
-    <p class="hero-eyebrow">✦ Votre espace produits R7 ✦</p>
-    <h1>Bienvenuti dans<br/>votre <em>QG</em> produits</h1>
-    <p>Fini les recherches interminables — la carte du restaurant, les animations du moment, les fiches techniques et de préparation sont à portée de clic.</p>
-  </div>
-
-  <div class="divider">
-    <div class="divider-line"></div>
-    <div class="divider-icon">✦</div>
-    <div class="divider-line"></div>
-  </div>
-
-  <div class="gazzetta-section">
-    <h2 class="section-title">📰 La Gazzetta Produits</h2>
-    <div class="news-grid">
-
-      <div class="news-card">
-        <div class="badge badge-green">Semaine 11</div>
-        <h3>PRONTI VIA !</h3>
-        <p>13.03 — Mini-site recettes en ligne<br/>23.03 — Préparation & dégustation<br/>07.04 — Nouvelle carte Printemps</p>
-      </div>
-
-      <div class="news-card">
-        <div class="badge badge-gold">Semaine 10</div>
-        <h3>🍝 Le Mois de la Pasta</h3>
-        <p>Animation à partir du mardi 03 mars 2026.</p>
-      </div>
-
-      <div class="news-card">
-        <div class="badge badge-red">Semaine 08</div>
-        <h3>MAJ Fiches Techniques</h3>
-        <p>→ Mozza in Carrozza<br/>→ Mafaldine Cèpes et Foie Gras</p>
-      </div>
-
-      <div class="news-card">
-        <div class="badge badge-gold">Semaine 06</div>
-        <h3>🌊 Escapade à Venezia</h3>
-        <p>Animation du mardi 03 février au lundi 02 mars 2026.</p>
-      </div>
-
-      <div class="news-card">
-        <div class="badge badge-green">Semaine 02</div>
-        <h3>❄️ Saveurs d'hiver</h3>
-        <p>Sélection "Saveurs d'hiver" du mardi 6 janvier au lundi 2 février 2026.</p>
-      </div>
-
-      <div class="news-card">
-        <div class="badge badge-red">Semaine 43</div>
-        <h3>Cadencier Hiver 25/26</h3>
-        <p>Le cadencier de commandes est disponible. Avant modification : télécharger ou copier le modèle de base.</p>
-      </div>
-
-      <div class="news-card">
-        <div class="badge badge-gold">Semaine 42</div>
-        <h3>🍂 Carte Hiver lancée</h3>
-        <p>14 octobre — Lancement de la carte hiver 25/26. Recette Bolognaise avec pointe prélevée ½ meule 12 mois.</p>
-      </div>
-
-      <div class="news-card">
-        <div class="badge badge-red">Semaine 40</div>
-        <h3>🌸 Octobre Rose</h3>
-        <p>13 jours de sélection rose et gourmande pour soutenir la ligue contre le cancer. Modification R7 chantilly rose disponible.</p>
-      </div>
-
+  <!-- ÉCRAN MOT DE PASSE -->
+  <div class="password-overlay" id="passwordOverlay">
+    <div class="password-box">
+      <h1>Accès protégé</h1>
+      <p>Veuillez entrer le mot de passe pour accéder à l’espace produits R7.</p>
+      <input
+        type="password"
+        id="passwordInput"
+        placeholder="Mot de passe"
+        autocomplete="off"
+        onkeydown="if(event.key === 'Enter') checkPassword()"
+      />
+      <button onclick="checkPassword()">Entrer</button>
+      <div class="password-error" id="passwordError"></div>
     </div>
   </div>
-</div>
 
-<div class="page" id="page-tutoriel">
-  <div class="page-header">
-    <h1>📖 Tutoriel</h1>
-    <p>Comment accéder aux fiches techniques et fiches de préparation</p>
-  </div>
-
-  <div class="tutoriel-container">
-    <div class="tuto-block">
-      <h3>🗺️ Comment naviguer sur le site</h3>
-      <p>La seule manière d'accéder à la bonne fiche technique ou fiche de préparation est de passer par la page <strong>Produits</strong> du site R7. Utilisez le menu de navigation en haut pour accéder à :</p>
-      <ul>
-        <li><strong>Cartes Printemps 2026 & Hiver 25/26</strong> — classées par secteur Cuisine / Salle / Outils</li>
-        <li><strong>Specialità dello Chef</strong></li>
-        <li><strong>Soirée Raclette</strong></li>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Il Ristorante <span style="color:#666;font-size:1rem">R7</span></div>
+      <ul class="nav-links">
+        <li><button type="button" onclick="showPage('accueil')" id="nav-accueil" class="active">Accueil</button></li>
+        <li><button type="button" onclick="showPage('tutoriel')" id="nav-tutoriel">Tutoriel</button></li>
+        <li><button type="button" onclick="showPage('produits')" id="nav-produits">Produits</button></li>
       </ul>
     </div>
+  </nav>
 
-    <div class="tuto-block">
-      <h3>🔄 Mises à jour des fiches</h3>
-      <p>Toute modification d'une fiche entraîne l'actualisation de sa date de révision. L'information est signalée sur la page d'accueil (La Gazzetta). Référez-vous uniquement aux documents au <strong>nouveau format</strong>.</p>
+  <!-- ACCUEIL -->
+  <div class="page active" id="page-accueil">
+    <div class="hero">
+      <p class="hero-eyebrow">✦ Votre espace produits R7 ✦</p>
+      <h1>Bienvenuti dans<br/>votre <em>QG</em> produits</h1>
+      <p>Fini les recherches interminables — la carte du restaurant, les animations du moment, les fiches techniques et de préparation sont à portée de clic.</p>
     </div>
 
-    <div class="tuto-block">
-      <h3>❓ Définitions</h3>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Fiche Technique (Rouge) — décrit un plat ou cocktail, porte le nom carte client</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Fiche Préparation (Vert) — décrit une préparation de base (ex : sauce béchamel)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#c8b420"></div> Fiche Financière (Jaune) — valorisée depuis une FT, indique le coût matière</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-icon">✦</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="gazzetta-section">
+      <h2 class="section-title">📰 La Gazzetta Produits</h2>
+      <div class="news-grid">
+
+        <div class="news-card">
+          <div class="badge badge-green">Semaine 11</div>
+          <h3>PRONTI VIA !</h3>
+          <p>13.03 — Mini-site recettes en ligne<br/>23.03 — Préparation & dégustation<br/>07.04 — Nouvelle carte Printemps</p>
+        </div>
+
+        <div class="news-card">
+          <div class="badge badge-gold">Semaine 10</div>
+          <h3>🍝 Le Mois de la Pasta</h3>
+          <p>Animation à partir du mardi 03 mars 2026.</p>
+        </div>
+
+        <div class="news-card">
+          <div class="badge badge-red">Semaine 08</div>
+          <h3>MAJ Fiches Techniques</h3>
+          <p>→ Mozza in Carrozza<br/>→ Mafaldine Cèpes et Foie Gras</p>
+        </div>
+
+        <div class="news-card">
+          <div class="badge badge-gold">Semaine 06</div>
+          <h3>🌊 Escapade à Venezia</h3>
+          <p>Animation du mardi 03 février au lundi 02 mars 2026.</p>
+        </div>
+
+        <div class="news-card">
+          <div class="badge badge-green">Semaine 02</div>
+          <h3>❄️ Saveurs d'hiver</h3>
+          <p>Sélection "Saveurs d'hiver" du mardi 6 janvier au lundi 2 février 2026.</p>
+        </div>
+
+        <div class="news-card">
+          <div class="badge badge-red">Semaine 43</div>
+          <h3>Cadencier Hiver 25/26</h3>
+          <p>Le cadencier de commandes est disponible. Avant modification : télécharger ou copier le modèle de base.</p>
+        </div>
+
+        <div class="news-card">
+          <div class="badge badge-gold">Semaine 42</div>
+          <h3>🍂 Carte Hiver lancée</h3>
+          <p>14 octobre — Lancement de la carte hiver 25/26. Recette Bolognaise avec pointe prélevée ½ meule 12 mois.</p>
+        </div>
+
+        <div class="news-card">
+          <div class="badge badge-red">Semaine 40</div>
+          <h3>🌸 Octobre Rose</h3>
+          <p>13 jours de sélection rose et gourmande pour soutenir la ligue contre le cancer. Modification R7 chantilly rose disponible.</p>
+        </div>
+
       </div>
     </div>
   </div>
-</div>
 
-<div class="page" id="page-produits">
-  <div class="page-header">
-    <h1>🍽️ Produits</h1>
-    <p>Accédez aux fiches techniques, fiches de préparation et outils par carte et secteur</p>
+  <!-- TUTORIEL -->
+  <div class="page" id="page-tutoriel">
+    <div class="page-header">
+      <h1>📖 Tutoriel</h1>
+      <p>Comment accéder aux fiches techniques et fiches de préparation</p>
+    </div>
+
+    <div class="tutoriel-container">
+      <div class="tuto-block">
+        <h3>🗺️ Comment naviguer sur le site</h3>
+        <p>La seule manière d'accéder à la bonne fiche technique ou fiche de préparation est de passer par la page <strong>Produits</strong> du site R7. Utilisez le menu de navigation en haut pour accéder à :</p>
+        <ul>
+          <li><strong>Cartes Printemps 2026 & Hiver 25/26</strong> — classées par secteur Cuisine / Salle / Outils</li>
+          <li><strong>Specialità dello Chef</strong></li>
+          <li><strong>Soirée Raclette</strong></li>
+        </ul>
+      </div>
+
+      <div class="tuto-block">
+        <h3>🔄 Mises à jour des fiches</h3>
+        <p>Toute modification d'une fiche entraîne l'actualisation de sa date de révision. L'information est signalée sur la page d'accueil (La Gazzetta). Référez-vous uniquement aux documents au <strong>nouveau format</strong>.</p>
+      </div>
+
+      <div class="tuto-block">
+        <h3>❓ Définitions</h3>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Fiche Technique (Rouge) — décrit un plat ou cocktail, porte le nom carte client</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Fiche Préparation (Vert) — décrit une préparation de base (ex : sauce béchamel)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#c8b420"></div> Fiche Financière (Jaune) — valorisée depuis une FT, indique le coût matière</div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="produits-container">
-
-    <div class="carte-block" id="block-hiver">
-      <div class="carte-header" onclick="toggleBlock('block-hiver')">
-        <div class="carte-header-left">
-          <div class="carte-icon icon-hiver">❄️</div>
-          <div>
-            <h2>Carte Hiver 2025/2026</h2>
-            <p>Cuisine · Salle · Outils</p>
-          </div>
-        </div>
-        <span class="carte-chevron">▼</span>
-      </div>
-      <div class="carte-body">
-        <div class="secteur-tabs">
-          <span class="secteur-tab tab-cuisine">🍳 Cuisine</span>
-          <span class="secteur-tab tab-salle">🍷 Salle</span>
-          <span class="secteur-tab tab-outils">🛠️ Outils</span>
-        </div>
-
-        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.75rem">Cliquez sur une catégorie pour ouvrir le dossier Drive correspondant :</p>
-
-        <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red)">🍳 Cuisine</strong>
-        <div class="categories-grid" style="margin-top:0.5rem;margin-bottom:1rem">
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🥗</span> Grignotage & Antipasti</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🥙</span> Salades</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🥩</span> Carpaccio & Tartares</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🍝</span> Pasta</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🍕</span> Pizza</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🍚</span> Risotto</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🥩</span> Secondi Piatti</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🍦</span> Gelati</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🧀</span> Dolci & Fromage</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🎂</span> Les Gourmands & Anniversaire</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>📋</span> Menus</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🚐</span> VAE</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🟢</span> Préparations Hiver 25/26</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🎥</span> Vidéos Recettes</a>
-        </div>
-
-        <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green)">🍷 Salle</strong>
-        <div class="categories-grid" style="margin-top:0.5rem;margin-bottom:1rem">
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🍹</span> Cocktails</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🥤</span> Cocktails Sans Alcool</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🍺</span> Bières</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🥂</span> Apéritifs</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🍷</span> Carte des Vins</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>☕</span> Boissons Chaudes</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🥃</span> Digestif</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🧃</span> Soda & Boissons</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🟢</span> Préparation Bar Hiv 25/26</a>
-        </div>
-
-        <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a6a20">🛠️ Outils</strong>
-        <div class="categories-grid" style="margin-top:0.5rem">
-          <a class="cat-link" href="https://drive.google.com/drive/folders/11J4fKzEe4YUrwE4AXR6SSpYA0CYz7Cz7" target="_blank"><span>📅</span> Cadencier</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/11J4fKzEe4YUrwE4AXR6SSpYA0CYz7Cz7" target="_blank"><span>📊</span> PMS</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/11J4fKzEe4YUrwE4AXR6SSpYA0CYz7Cz7" target="_blank"><span>📄</span> Fiches Instructions</a>
-          <a class="cat-link" href="https://drive.google.com/drive/folders/11J4fKzEe4YUrwE4AXR6SSpYA0CYz7Cz7" target="_blank"><span>🔄</span> Déroulement de Postes</a>
-        </div>
-      </div>
+  <!-- PRODUITS -->
+  <div class="page" id="page-produits">
+    <div class="page-header">
+      <h1>🍽️ Produits</h1>
+      <p>Accédez aux fiches techniques, fiches de préparation et outils par carte et secteur</p>
     </div>
 
-    <div class="carte-block" id="block-printemps">
-      <div class="carte-header" onclick="toggleBlock('block-printemps')">
-        <div class="carte-header-left">
-          <div class="carte-icon icon-printemps">🌸</div>
-          <div>
-            <h2>Carte Printemps 2026</h2>
-            <p>Cuisine · Salle</p>
+    <div class="produits-container">
+
+      <!-- CARTE HIVER -->
+      <div class="carte-block" id="block-hiver">
+        <div class="carte-header" onclick="toggleBlock('block-hiver')">
+          <div class="carte-header-left">
+            <div class="carte-icon icon-hiver">❄️</div>
+            <div>
+              <h2>Carte Hiver 2025/2026</h2>
+              <p>Cuisine · Salle · Outils</p>
+            </div>
+          </div>
+          <span class="carte-chevron">▼</span>
+        </div>
+        <div class="carte-body">
+          <div class="secteur-tabs">
+            <span class="secteur-tab tab-cuisine">🍳 Cuisine</span>
+            <span class="secteur-tab tab-salle">🍷 Salle</span>
+            <span class="secteur-tab tab-outils">🛠️ Outils</span>
+          </div>
+
+          <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.75rem">Cliquez sur une catégorie pour ouvrir le dossier Drive correspondant :</p>
+
+          <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red)">🍳 Cuisine</strong>
+          <div class="categories-grid" style="margin-top:0.5rem;margin-bottom:1rem">
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🥗</span> Grignotage & Antipasti</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🥙</span> Salades</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🥩</span> Carpaccio & Tartares</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🍝</span> Pasta</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🍕</span> Pizza</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🍚</span> Risotto</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🥩</span> Secondi Piatti</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🍦</span> Gelati</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🧀</span> Dolci & Fromage</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🎂</span> Les Gourmands & Anniversaire</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>📋</span> Menus</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🚐</span> VAE</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🟢</span> Préparations Hiver 25/26</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1BCV5aaNK66l044_8u6KfuQStKQcq48OT" target="_blank"><span>🎥</span> Vidéos Recettes</a>
+          </div>
+
+          <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green)">🍷 Salle</strong>
+          <div class="categories-grid" style="margin-top:0.5rem;margin-bottom:1rem">
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🍹</span> Cocktails</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🥤</span> Cocktails Sans Alcool</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🍺</span> Bières</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🥂</span> Apéritifs</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🍷</span> Carte des Vins</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>☕</span> Boissons Chaudes</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🥃</span> Digestif</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🧃</span> Soda & Boissons</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/102qe6lPbDj4_EEqbcVkd63gKhpoG3lPL" target="_blank"><span>🟢</span> Préparation Bar Hiv 25/26</a>
+          </div>
+
+          <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a6a20">🛠️ Outils</strong>
+          <div class="categories-grid" style="margin-top:0.5rem">
+            <a class="cat-link" href="https://drive.google.com/drive/folders/11J4fKzEe4YUrwE4AXR6SSpYA0CYz7Cz7" target="_blank"><span>📅</span> Cadencier</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/11J4fKzEe4YUrwE4AXR6SSpYA0CYz7Cz7" target="_blank"><span>📊</span> PMS</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/11J4fKzEe4YUrwE4AXR6SSpYA0CYz7Cz7" target="_blank"><span>📄</span> Fiches Instructions</a>
+            <a class="cat-link" href="https://drive.google.com/drive/folders/11J4fKzEe4YUrwE4AXR6SSpYA0CYz7Cz7" target="_blank"><span>🔄</span> Déroulement de Postes</a>
           </div>
         </div>
-        <span class="carte-chevron">▼</span>
       </div>
-      <div class="carte-body">
-        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.75rem">Nouvelle carte disponible le 07 Avril 2026</p>
 
-        <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red)">🍳 Cuisine</strong>
-        <div class="categories-grid" style="margin-top:0.5rem;margin-bottom:1rem">
-          <a class="cat-link" href="https://drive.google.com/drive/folders/15jkhx0kCcT_kDfgmfH-SELTDcKJWw3xD" target="_blank"><span>📂</span> Cuisine Printemps 2026</a>
+      <!-- CARTE PRINTEMPS -->
+      <div class="carte-block" id="block-printemps">
+        <div class="carte-header" onclick="toggleBlock('block-printemps')">
+          <div class="carte-header-left">
+            <div class="carte-icon icon-printemps">🌸</div>
+            <div>
+              <h2>Carte Printemps 2026</h2>
+              <p>Cuisine · Salle</p>
+            </div>
+          </div>
+          <span class="carte-chevron">▼</span>
         </div>
+        <div class="carte-body">
+          <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.75rem">Nouvelle carte disponible le 07 Avril 2026</p>
 
-        <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green)">🍷 Salle</strong>
-        <div class="categories-grid" style="margin-top:0.5rem">
-          <a class="cat-link" href="https://drive.google.com/drive/folders/1ZkWKrv5VGt02P6xUnDWjGZNu1CD9dfV2" target="_blank"><span>📂</span> Salle Printemps 2026</a>
-        </div>
-      </div>
-    </div>
+          <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red)">🍳 Cuisine</strong>
+          <div class="categories-grid" style="margin-top:0.5rem;margin-bottom:1rem">
+            <a class="cat-link" href="https://drive.google.com/drive/folders/15jkhx0kCcT_kDfgmfH-SELTDcKJWw3xD" target="_blank"><span>📂</span> Cuisine Printemps 2026</a>
+          </div>
 
-    <div class="carte-block" id="block-specialita">
-      <div class="carte-header" onclick="toggleBlock('block-specialita')">
-        <div class="carte-header-left">
-          <div class="carte-icon icon-special">⭐</div>
-          <div>
-            <h2>Specialità dello Chef</h2>
-            <p>Les créations exclusives du chef</p>
+          <strong style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green)">🍷 Salle</strong>
+          <div class="categories-grid" style="margin-top:0.5rem">
+            <a class="cat-link" href="https://drive.google.com/drive/folders/1ZkWKrv5VGt02P6xUnDWjGZNu1CD9dfV2" target="_blank"><span>📂</span> Salle Printemps 2026</a>
           </div>
         </div>
-        <span class="carte-chevron">▼</span>
       </div>
-      <div class="carte-body">
-        <a class="direct-link" href="https://drive.google.com/drive/folders/14iKE58-bgOTuW4OLurriistAF9Cu_xy3" target="_blank">📂 Ouvrir le dossier Specialità →</a>
-      </div>
-    </div>
 
-    <div class="carte-block" id="block-raclette">
-      <div class="carte-header" onclick="toggleBlock('block-raclette')">
-        <div class="carte-header-left">
-          <div class="carte-icon icon-raclette">🧀</div>
-          <div>
-            <h2>Soirée Raclette</h2>
-            <p>Fiches et préparations spéciales</p>
+      <!-- SPECIALITA -->
+      <div class="carte-block" id="block-specialita">
+        <div class="carte-header" onclick="toggleBlock('block-specialita')">
+          <div class="carte-header-left">
+            <div class="carte-icon icon-special">⭐</div>
+            <div>
+              <h2>Specialità dello Chef</h2>
+              <p>Les créations exclusives du chef</p>
+            </div>
           </div>
+          <span class="carte-chevron">▼</span>
         </div>
-        <span class="carte-chevron">▼</span>
+        <div class="carte-body">
+          <a class="direct-link" href="https://drive.google.com/drive/folders/14iKE58-bgOTuW4OLurriistAF9Cu_xy3" target="_blank">📂 Ouvrir le dossier Specialità →</a>
+        </div>
       </div>
-      <div class="carte-body">
-        <a class="direct-link" href="https://drive.google.com/drive/folders/1im3j2qsGKOFX0BIWP75-BL-M2flpGt_J" target="_blank">📂 Ouvrir le dossier Soirée Raclette →</a>
-      </div>
-    </div>
 
-    <div class="carte-block" id="block-animations">
-      <div class="carte-header" onclick="toggleBlock('block-animations')">
-        <div class="carte-header-left">
-          <div class="carte-icon icon-anim">🎉</div>
-          <div>
-            <h2>Animations</h2>
-            <p>Toutes les animations du moment</p>
+      <!-- SOIREE RACLETTE -->
+      <div class="carte-block" id="block-raclette">
+        <div class="carte-header" onclick="toggleBlock('block-raclette')">
+          <div class="carte-header-left">
+            <div class="carte-icon icon-raclette">🧀</div>
+            <div>
+              <h2>Soirée Raclette</h2>
+              <p>Fiches et préparations spéciales</p>
+            </div>
           </div>
+          <span class="carte-chevron">▼</span>
         </div>
-        <span class="carte-chevron">▼</span>
+        <div class="carte-body">
+          <a class="direct-link" href="https://drive.google.com/drive/folders/1im3j2qsGKOFX0BIWP75-BL-M2flpGt_J" target="_blank">📂 Ouvrir le dossier Soirée Raclette →</a>
+        </div>
       </div>
-      <div class="carte-body">
-        <a class="direct-link" href="https://drive.google.com/drive/folders/1q40NG9KIAI0b-DDIjzRhgvFc0qPWUvtv" target="_blank">📂 Ouvrir le dossier Animations →</a>
-      </div>
-    </div>
 
+      <!-- ANIMATIONS -->
+      <div class="carte-block" id="block-animations">
+        <div class="carte-header" onclick="toggleBlock('block-animations')">
+          <div class="carte-header-left">
+            <div class="carte-icon icon-anim">🎉</div>
+            <div>
+              <h2>Animations</h2>
+              <p>Toutes les animations du moment</p>
+            </div>
+          </div>
+          <span class="carte-chevron">▼</span>
+        </div>
+        <div class="carte-body">
+          <a class="direct-link" href="https://drive.google.com/drive/folders/1q40NG9KIAI0b-DDIjzRhgvFc0qPWUvtv" target="_blank">📂 Ouvrir le dossier Animations →</a>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
 
-<footer>
-  <p>© 2026 Il Ristorante — <span>R7 Espace Produits</span> — Usage interne uniquement</p>
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Il Ristorante — <span>R7 Espace Produits</span> — Usage interne uniquement</p>
+  </footer>
 
-<script>
-  const SITE_PASSWORD = "Recette2026!";
-  const STORAGE_KEY = "r7_site_access";
+  <script>
+    const SITE_PASSWORD = "Recette2026!";
+    const STORAGE_KEY = "r7_site_access";
 
-  function unlockSite() {
-    document.getElementById("passwordOverlay").classList.add("hidden");
-    document.body.classList.remove("locked");
-    document.getElementById("passwordInput").value = "";
-    document.getElementById("passwordError").textContent = "";
-  }
-
-  function checkPassword() {
-    const input = document.getElementById("passwordInput").value;
-    const error = document.getElementById("passwordError");
-
-    if (input === SITE_PASSWORD) {
-      sessionStorage.setItem(STORAGE_KEY, "ok");
-      unlockSite();
-    } else {
-      error.textContent = "Mot de passe incorrect.";
+    function unlockSite() {
+      document.getElementById("passwordOverlay").classList.add("hidden");
+      document.body.classList.remove("locked");
+      document.getElementById("passwordInput").value = "";
+      document.getElementById("passwordError").textContent = "";
     }
-  }
 
-  window.addEventListener("load", () => {
-    if (sessionStorage.getItem(STORAGE_KEY) === "ok") {
-      unlockSite();
-    } else {
-      document.getElementById("passwordInput").focus();
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      const error = document.getElementById("passwordError");
+
+      if (input === SITE_PASSWORD) {
+        sessionStorage.setItem(STORAGE_KEY, "ok");
+        unlockSite();
+      } else {
+        error.textContent = "Mot de passe incorrect.";
+      }
     }
-  });
 
-  function showPage(name) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    document.getElementById('page-' + name).classList.add('active');
-    document.getElementById('nav-' + name).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return false;
-  }
+    window.addEventListener("load", function () {
+      if (sessionStorage.getItem(STORAGE_KEY) === "ok") {
+        unlockSite();
+      } else {
+        document.getElementById("passwordInput").focus();
+      }
+    });
 
-  function toggleBlock(id) {
-    const block = document.getElementById(id);
-    block.classList.toggle('open');
-  }
-</script>
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(function (p) {
+        p.classList.remove('active');
+      });
+
+      document.querySelectorAll('.nav-links button').forEach(function (b) {
+        b.classList.remove('active');
+      });
+
+      const page = document.getElementById('page-' + name);
+      const button = document.getElementById('nav-' + name);
+
+      if (page) page.classList.add('active');
+      if (button) button.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleBlock(id) {
+      const block = document.getElementById(id);
+      block.classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
