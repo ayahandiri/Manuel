@@ -32,6 +32,17 @@
       overflow: hidden;
     }
 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(200,160,74,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139,26,26,0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
     /* ── ÉCRAN MOT DE PASSE ── */
     .password-overlay {
       position: fixed;
@@ -119,25 +130,18 @@
       min-height: 1.2em;
     }
 
-    /* ── BACKGROUND TEXTURE ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        radial-gradient(ellipse at 20% 20%, rgba(200,160,74,0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(139,26,26,0.06) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
     /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
+      position: sticky;
+      top: 0;
+      z-index: 100;
       background: var(--dark);
       border-bottom: 2px solid var(--gold);
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 0 2rem;
-      height: 64px;
+      min-height: 64px;
     }
 
     .nav-logo {
@@ -146,10 +150,16 @@
       color: var(--gold);
       letter-spacing: 0.05em;
       text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
     }
 
     .nav-links {
-      display: flex; gap: 0.5rem; list-style: none;
+      display: flex;
+      gap: 0.5rem;
+      list-style: none;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
@@ -159,12 +169,17 @@
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 0.4rem 0.8rem;
+      padding: 0.55rem 0.9rem;
       border-radius: 4px;
       transition: color 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
     }
 
-    .nav-links a:hover, .nav-links a.active {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--gold);
       background: rgba(200,160,74,0.1);
     }
@@ -210,12 +225,15 @@
       margin: 0 auto 2rem;
     }
 
-    /* ── DIVIDER ── */
     .divider {
-      display: flex; align-items: center; gap: 1rem;
-      max-width: 900px; margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto 2rem;
       padding: 0 2rem;
     }
+
     .divider-line { flex: 1; height: 1px; background: var(--gold); opacity: 0.3; }
     .divider-icon { color: var(--gold); font-size: 1rem; opacity: 0.6; }
 
@@ -231,12 +249,15 @@
       font-size: 1.4rem;
       color: var(--dark);
       margin-bottom: 1.5rem;
-      display: flex; align-items: center; gap: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
     .section-title::after {
       content: '';
-      flex: 1; height: 1px;
+      flex: 1;
+      height: 1px;
       background: linear-gradient(to right, var(--gold), transparent);
     }
 
@@ -257,15 +278,6 @@
     .news-card:hover {
       box-shadow: 0 8px 24px rgba(0,0,0,0.08);
       transform: translateY(-2px);
-    }
-
-    .news-week {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 0.5rem;
     }
 
     .news-card h3 {
@@ -291,6 +303,7 @@
       border-radius: 20px;
       margin-bottom: 0.6rem;
     }
+
     .badge-red { background: rgba(139,26,26,0.1); color: var(--red); }
     .badge-green { background: rgba(45,90,39,0.1); color: var(--green); }
     .badge-gold { background: rgba(200,160,74,0.15); color: #8a6a20; }
@@ -313,7 +326,9 @@
 
     .carte-header {
       padding: 1.25rem 1.5rem;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       cursor: pointer;
       transition: background 0.2s;
       user-select: none;
@@ -322,13 +337,18 @@
     .carte-header:hover { background: rgba(200,160,74,0.04); }
 
     .carte-header-left {
-      display: flex; align-items: center; gap: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
     .carte-icon {
-      width: 40px; height: 40px;
+      width: 40px;
+      height: 40px;
       border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.2rem;
     }
 
@@ -367,7 +387,8 @@
     .carte-block.open .carte-body { display: block; }
 
     .secteur-tabs {
-      display: flex; gap: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
       margin: 1rem 0;
       flex-wrap: wrap;
     }
@@ -389,21 +410,18 @@
       color: var(--red);
       border-color: rgba(139,26,26,0.2);
     }
-    .tab-cuisine:hover { background: var(--red); color: white; }
 
     .tab-salle {
       background: rgba(45,90,39,0.08);
       color: var(--green);
       border-color: rgba(45,90,39,0.2);
     }
-    .tab-salle:hover { background: var(--green); color: white; }
 
     .tab-outils {
       background: rgba(200,160,74,0.12);
       color: #8a6a20;
       border-color: rgba(200,160,74,0.3);
     }
-    .tab-outils:hover { background: var(--gold); color: white; }
 
     .categories-grid {
       display: grid;
@@ -413,7 +431,9 @@
     }
 
     .cat-link {
-      display: flex; align-items: center; gap: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
       padding: 0.75rem 1rem;
       background: var(--cream);
       border: 1px solid rgba(200,160,74,0.2);
@@ -435,7 +455,9 @@
     .cat-link span { font-size: 1rem; }
 
     .direct-link {
-      display: inline-flex; align-items: center; gap: 0.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
       margin-top: 1rem;
       padding: 0.75rem 1.5rem;
       background: var(--dark);
@@ -447,6 +469,7 @@
       letter-spacing: 0.05em;
       transition: background 0.2s;
     }
+
     .direct-link:hover { background: #2d2010; }
 
     /* ── TUTORIEL PAGE ── */
@@ -469,7 +492,9 @@
       font-size: 1.15rem;
       color: var(--dark);
       margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
 
     .tuto-block p, .tuto-block li {
@@ -478,22 +503,31 @@
       line-height: 1.7;
     }
 
-    .tuto-block ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+    .tuto-block ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
     .tuto-block li { margin-bottom: 0.3rem; }
 
     .legend {
-      display: flex; flex-wrap: wrap; gap: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
       margin-top: 1rem;
     }
 
     .legend-item {
-      display: flex; align-items: center; gap: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-size: 0.85rem;
       font-weight: 500;
     }
 
     .legend-dot {
-      width: 14px; height: 14px;
+      width: 14px;
+      height: 14px;
       border-radius: 3px;
     }
 
@@ -523,101 +557,98 @@
       text-align: center;
       padding: 1.5rem;
       font-size: 0.8rem;
-      position: relative; z-index: 1;
+      position: relative;
+      z-index: 1;
     }
 
     footer span { color: var(--gold); }
 
-    /* ── RESPONSIVE ── */
+    /* ── MOBILE ── */
     @media (max-width: 600px) {
+      nav {
+        padding: 0.75rem 1rem;
+        align-items: flex-start;
+        gap: 0.75rem;
+        flex-direction: column;
+      }
 
-  nav {
-    padding: 0 1rem;
-    height: auto;
-    min-height: 64px;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0.6rem;
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-  }
+      .nav-logo {
+        font-size: 1.35rem;
+      }
 
-  .nav-logo {
-    font-size: 1.4rem;
-  }
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        gap: 0.5rem;
+      }
 
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    width: 100%;
-  }
+      .nav-links li {
+        width: 100%;
+      }
 
-  .nav-links a {
-    font-size: 0.75rem;
-    padding: 0.5rem 0.7rem;
-    flex: 1;
-    text-align: center;
-  }
+      .nav-links a {
+        width: 100%;
+        font-size: 0.72rem;
+        padding: 0.65rem 0.4rem;
+        text-align: center;
+      }
 
-  .hero {
-    padding: 3rem 1rem 2rem;
-  }
+      .hero {
+        padding: 3rem 1rem 2rem;
+      }
 
-  .hero h1 {
-    font-size: 2.2rem;
-  }
+      .hero p {
+        font-size: 0.95rem;
+      }
 
-  .hero p {
-    font-size: 0.95rem;
-  }
+      .page-header,
+      .gazzetta-section,
+      .produits-container,
+      .tutoriel-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
 
-  .page-header,
-  .gazzetta-section,
-  .produits-container,
-  .tutoriel-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
 
-  .categories-grid {
-    grid-template-columns: 1fr;
-  }
+      .carte-header {
+        padding: 1rem;
+      }
 
-  .carte-header {
-    padding: 1rem;
-  }
+      .carte-body {
+        padding: 0 1rem 1rem;
+      }
 
-  .carte-header h2 {
-    font-size: 1rem;
-  }
+      .carte-header h2 {
+        font-size: 1rem;
+      }
 
-  .carte-header p {
-    font-size: 0.75rem;
-  }
+      .carte-header p {
+        font-size: 0.75rem;
+      }
 
-  .carte-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 1rem;
-  }
+      .carte-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+      }
 
-  .direct-link {
-    width: 100%;
-    justify-content: center;
-  }
+      .direct-link {
+        width: 100%;
+        justify-content: center;
+      }
 
-  footer {
-    font-size: 0.7rem;
-    padding: 1rem;
-  }
-}
+      .password-box {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body class="locked">
 
-<!-- ÉCRAN MOT DE PASSE -->
 <div class="password-overlay" id="passwordOverlay">
   <div class="password-box">
     <h1>Accès protégé</h1>
@@ -634,17 +665,15 @@
   </div>
 </div>
 
-<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#" onclick="showPage('accueil')">Il Ristorante <span style="color:#666;font-size:1rem">R7</span></a>
+  <a class="nav-logo" href="#" onclick="return showPage('accueil')">Il Ristorante <span style="color:#666;font-size:1rem">R7</span></a>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('accueil')" id="nav-accueil" class="active">Accueil</a></li>
-    <li><a href="#" onclick="showPage('tutoriel')" id="nav-tutoriel">Tutoriel</a></li>
-    <li><a href="#" onclick="showPage('produits')" id="nav-produits">Produits</a></li>
+    <li><a href="#" onclick="return showPage('accueil')" id="nav-accueil" class="active">Accueil</a></li>
+    <li><a href="#" onclick="return showPage('tutoriel')" id="nav-tutoriel">Tutoriel</a></li>
+    <li><a href="#" onclick="return showPage('produits')" id="nav-produits">Produits</a></li>
   </ul>
 </nav>
 
-<!-- ═══════════════════════════════════════ ACCUEIL ═══ -->
 <div class="page active" id="page-accueil">
   <div class="hero">
     <p class="hero-eyebrow">✦ Votre espace produits R7 ✦</p>
@@ -652,7 +681,11 @@
     <p>Fini les recherches interminables — la carte du restaurant, les animations du moment, les fiches techniques et de préparation sont à portée de clic.</p>
   </div>
 
-  <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">✦</div>
+    <div class="divider-line"></div>
+  </div>
 
   <div class="gazzetta-section">
     <h2 class="section-title">📰 La Gazzetta Produits</h2>
@@ -710,14 +743,13 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ TUTORIEL ═══ -->
 <div class="page" id="page-tutoriel">
   <div class="page-header">
     <h1>📖 Tutoriel</h1>
     <p>Comment accéder aux fiches techniques et fiches de préparation</p>
   </div>
-  <div class="tutoriel-container">
 
+  <div class="tutoriel-container">
     <div class="tuto-block">
       <h3>🗺️ Comment naviguer sur le site</h3>
       <p>La seule manière d'accéder à la bonne fiche technique ou fiche de préparation est de passer par la page <strong>Produits</strong> du site R7. Utilisez le menu de navigation en haut pour accéder à :</p>
@@ -741,16 +773,15 @@
         <div class="legend-item"><div class="legend-dot" style="background:#c8b420"></div> Fiche Financière (Jaune) — valorisée depuis une FT, indique le coût matière</div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ PRODUITS ═══ -->
 <div class="page" id="page-produits">
   <div class="page-header">
     <h1>🍽️ Produits</h1>
     <p>Accédez aux fiches techniques, fiches de préparation et outils par carte et secteur</p>
   </div>
+
   <div class="produits-container">
 
     <div class="carte-block" id="block-hiver">
@@ -931,7 +962,7 @@
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
     document.getElementById('nav-' + name).classList.add('active');
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return false;
   }
 
